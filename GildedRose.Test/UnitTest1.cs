@@ -11,30 +11,51 @@ namespace GildedRose.Test
     [TestClass]
     public class UnitTest1
     {
+        string headerItem = "Name, SellIn, Quality"; 
         [TestMethod]
-        public void TestMethod1()
+        public void ShouldCreateEmptyRapport()
         {
-            IList<Item> Items = new List<Item> { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
-            GildedRose app = new GildedRose(Items);
-            app.UpdateQuality();
-            Assert.AreEqual("foo", Items[0].Name);
+            Rapport<Item> rapport = new Rapport<Item>();
+            int jourDuRapport = 1;
+            RapportSection<Item> section = rapport.CreateSection(jourDuRapport, new List<Item>() );
 
-            Dictionary<string,string> COLLECTION = new Dictionary<string, string>();
-            foreach (KeyValuePair<string,string> VARIABLE in COLLECTION)
-            {
-                
-            }
+            rapport.AjouterSection(section);
+
+            Assert.AreEqual(headerItem, section.GetHeader());
+            Assert.AreEqual(jourDuRapport, section.JourDuRapport);
         }
 
-        //[TestMethod]
-        //public void ThirtyDays()
-        //{
-        //    StringBuilder fakeoutput = new StringBuilder();
-        //    Console.SetOut(new StringWriter(fakeoutput));
-        //    Console.SetIn(new StringReader("a\n"));
-        //    Program.Main(new string[] { });
-        //    var output = fakeoutput.ToString();
-        //    Approvals.Verify(output);
-        //}
+        IList<Item> Items = new List<Item>{
+            new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
+            new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
+            new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
+            new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
+            new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = -1, Quality = 80},
+            new Item {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20},
+            new Item {Name = "Backstage passes to a TAFKAL80ETC concert",SellIn = 10,Quality = 49},
+            new Item {Name = "Backstage passes to a TAFKAL80ETC concert",SellIn = 5,Quality = 49},
+            new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
+        };
+
+        [TestMethod]
+        public void ShouldCreateRapportWithOneSection()
+        {
+            Rapport<Item> rapport = new Rapport<Item>();
+            RapportSection<Item> section = rapport.CreateSection(0, new List<Item>(Items));
+            rapport.AjouterSection(section);
+        }
+
+        [TestMethod]
+        public void ShouldGenerateRapportWithOneSection()
+        {
+            Rapport<Item> rapport = new Rapport<Item>();
+            RapportSection<Item> section = rapport.CreateSection(0, new List<Item>(Items));
+            rapport.AjouterSection(section);
+
+            string path = @"output.txt";
+            IGenerator generator = new FileStringRapportGenerator<Item>(path);
+            generator.GenerateRapport(rapport);
+
+        }
     }
 }

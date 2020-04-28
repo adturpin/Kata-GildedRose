@@ -62,10 +62,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileStringRapportGenerator.cs" />
     <Compile Include="GildedRose.cs" />
+    <Compile Include="IGenerator.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rapport.cs" />
+    <Compile Include="RapportDataFormatter.cs" />
+    <Compile Include="RapportSection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

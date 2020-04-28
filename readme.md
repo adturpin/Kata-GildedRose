@@ -23,3 +23,22 @@ N'hésitez pas à apporter des modifications à la méthode UpdateQuality et à 
 fonctionne correctement. Cependant, ne modifiez pas la classe Item ou la propriété Items car celles-ci appartiennent au gobelin dans le
 coin qui va insta-rage et one-shot vous car il ne croit pas en la propriété du code partagé (vous pouvez faire le
 La méthode UpdateQuality et la propriété Items sont statiques si vous le souhaitez, nous couvrirons pour vous).
+
+
+TODO list :
+- Object Rapport => présentation des donnés 
+	- rapport section
+	- header -> lié à l'item ?
+	- jour
+- renommer les variables 
+- unfier les indentations 
+- séparer le programe :
+	- responsabilité
+	- updateQuality
+	- construir les objets
+	- Les inputs pas en dure dans le code
+	- typer les objets (fort)
+- analyse métier => refacto
+- mettre de l'objet !! 
+
+
