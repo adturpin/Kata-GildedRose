@@ -10,43 +10,28 @@ namespace GildedRose
         private static Stream stream;
         public static void Main(string[] args)
         {
+            // Je suis le phantome de ce code
             try
             {
-
+                
                 Initializer();
 
                 Console.WriteLine("OMGHAI!");
+                ItemFactory factory = new ItemFactory();
 
-                IList<Item> Items = new List<Item>{
-                new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
-                new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
-                new Item {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
-                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
-                new Item {Name = "Sulfuras, Hand of Ragnaros", SellIn = -1, Quality = 80},
-                new Item
-                {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    SellIn = 15,
-                    Quality = 20
-                },
-                new Item
-                {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    SellIn = 10,
-                    Quality = 49
-                },
-                new Item
-                {
-                    Name = "Backstage passes to a TAFKAL80ETC concert",
-                    SellIn = 5,
-                    Quality = 49
-                },
-				// this conjured item does not work properly yet
-				new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
-            };
 
-                var app = new GildedRose(Items);
+                // this conjured item does not work properly yet
+                //new ItemCommon() {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
 
+                IList<Item> Items = GetItems();
+
+                IList<ItemCommon> itemType = new List<ItemCommon>();
+                foreach (Item item in Items)
+                {
+                    itemType.Add(factory.CreateItem(item.Name, item.Quality, item.SellIn));
+                }
+
+                var app = new GildedRose(itemType);
 
                 Rapport<Item> rapport = new Rapport<Item>();
                 string header = "Name, SellIn, Quality";
@@ -86,6 +71,22 @@ namespace GildedRose
 
         }
 
+        private static List<Item> GetItems()
+        {
+            return new List<Item>
+            {
+                new Item() {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
+                new Item() {Name = "Aged Brie", SellIn = 2, Quality = 0},
+                new Item() {Name = "Elixir of the Mongoose", SellIn = 5, Quality = 7},
+                new Item() {Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80},
+                new Item() {Name = "Sulfuras, Hand of Ragnaros", SellIn = -1, Quality = 80},
+                new Item() {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20},
+                new Item() {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 49},
+                new Item() {Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 49},
+                new Item() {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
+            };
+        }
+
         private static void CleanUp()
         {
             stream.Dispose();
@@ -100,7 +101,7 @@ namespace GildedRose
 
         private static Item cloneItem(Item item)
         {
-            return new Item()
+            return new ItemCommon()
             {
                 Name = item.Name,
                 Quality = item.Quality,

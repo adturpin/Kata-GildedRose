@@ -66,6 +66,14 @@
     <Compile Include="GildedRose.cs" />
     <Compile Include="IGenerator.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="ItemAgedBrie.cs" />
+    <Compile Include="ItemBackStage.cs" />
+    <Compile Include="ItemCommon.cs" />
+    <Compile Include="ItemDexterityVest.cs" />
+    <Compile Include="ItemElixir.cs" />
+    <Compile Include="ItemFactory.cs" />
+    <Compile Include="ItemSulfuras.cs" />
+    <Compile Include="IUpgrade.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rapport.cs" />
